@@ -1,0 +1,17 @@
+debug: true
+
+redis:
+  url: redis://localhost:6379
+
+routes:
+  - path: /api/v1/users/*
+    upstream_url: http://localhost:5001
+    methods: [GET, POST]
+    auth: protected
+    rate_limit: 20
+
+  - path: /public/*
+    upstream_url: http://localhost:5002
+    methods: [GET]
+    auth: public
+    rate_limit: 100
